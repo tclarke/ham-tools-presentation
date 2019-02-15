@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Useful Tools for the HAM Maker</title>
+    <link rel="stylesheet" type="text/css" href="build/build.css">
+  </head>
+  <body>
+    <article class="deck">
+      <section class="cocoa">
+        <h1>Useful Tools for the HAM Maker</h1>
+      </section>
+      <section class="cocoa">
+        <h1>Abstract</h1>
+        <div class="box top notify" id="intro" style="width: 50%; text-align: left" data-noarrow="1">
+          <p>This presentation is an introduction to some software tools that are useful for design, build, and repair of radio related projects.</p>
+          <p>In order to make the presentation more relevant, we'll be designing a relatively simple but useful circuit, a microphone preamp and vocal compressor.</p>
+          <p>While this will be focused on the tools, I will go over some basic theory so that everyone can follow along.</p>
+        </div>
+      </section>
+      <section class="carbonfiber cocoa">
+        <h1>High level design</h1>
+        <object data="images/mic_preamp_block.svg" type="image/svg+xml"></object>
+        <ul class="build build-items">
+          <li>Electret: A condenser mic that self-charges and has a build-in JFET</li>
+          <li>LNA: Must work over vocal frequency range.</li>
+          <li>LPF: remove harmonics from the amplifier</li>
+          <li>Compressor: Compress the dynamic range so you get a more consistent SSB power level.</li>
+        </ul>
+      </section>
+      <section class="carbonfiber cocoa">
+        <h1>Microphone</h1>
+        <ul class="build build-items">
+          <li>Electret has a permanent static charge</li>
+          <li>Needs to be biased</li>
+          <li>Very low output level</li>
+          <ul>
+            <li>It has a JFET amp built-in</li>
+          </ul>
+          <li>We still need to set the drive reactance and AC couple</li>
+        </ul>
+      </section>
+      <section class="emphatic-text paper">
+        <h1>Exercise - Microphone</h1>
+        <ul class="build build-items">
+          <li>Simulation of microphone</li>
+          <ul>
+            <li>Manufacturer SPICEs (LTSpice, TINA, etc.)</li>
+            <li>qucs</li>
+            <li>KiCad</li>
+          </ul>
+          <li>Parametric search for microphone</li>
+          <ul>
+            <li><a target="_blank" href="https://mouser.com">Mouser</a></li>
+            <li><a target="_blank" href="https://www.digikey.com/products/en/audio-products/microphones/158?k=microphone&k=&pkeyword=microphone&sv=0&pv630=3&sf=0&FV=a40062%2Cd80440%2Cd800a2%2Cd800d1%2Cd800d7%2Cd800dc%2Cd800dd%2Cd800e1%2Cd800ee%2Cd8001f%2Cd80020%2Cd80029%2Cd8002b%2Cd8030d%2Cd8030e%2Cd80310%2Cd80311%2Cd80317%2Cd80318%2Cd8031a%2Cd8031b%2Cd8031f%2Cd80326%2Cd8032b%2Cd8032c%2Cd8032f%2Cd80376%2Cd80380%2Cd80384%2C1f140000%2Cyr100Hz+~+10kHz%7C2145%2Cyr100Hz+~+5.5kHz%7C2145%2Cyr100Hz+~+5.8kHz%7C2145%2Cyr100Hz+~+5kHz%7C2145%2Cyr100Hz+~+6.25kHz%7C2145%2Cyr100Hz+~+6.4kHz%7C2145%2Cyr100Hz+~+6kHz%7C2145%2Cyr100Hz+~+7.2kHz%7C2145%2Cyr20Hz+~+15kHz%7C2145%2Cyr20Hz+~+20kHz%7C2145%2Cyr30Hz+~+15kHz%7C2145%2Cyr50Hz+~+16kHz%7C2145%2Cffe0009e&quantity=1&ColumnSort=1000011&page=1&stock=1&pageSize=25">Digikey</a></li>
+            <li><a target="_blank" href="https://octopart.com">Octopart</a></li>
+            <li>Manufacturer sites</li>
+          </ul>
+          <li>Reading a microphone <a target="_blank" href="http://www.puiaudio.com/pdf/AUM-5047L-3-LW100-R.pdf">datasheet</a></li>
+          <ul>
+            <li><a target="_blank" href="http://www.sengpielaudio.com/calculator-db-volt.htm">dBV to V converter</a></li>
+          </ul>
+        </ul>
+      </section>
+      <section class="carbonfiber cocoa">
+        <h1>Low Noise Amplifier and Filter</h1>
+        <ul class="build build-items">
+          <li>OPAMPs are great for audio frequencies</li>
+          <li>Boost the gain more than needed and include a passive LPF</li>
+          <li>Or just use an active filter with gain</li>
+        </ul>
+      </section>
+      <section class="emphatic-text paper">
+        <h1>Exercise - Design a LPF with Gain</h1>
+        <ul class="build build-items">
+          <li><a target="_blank" href="https://www.analog.com/designtools/en/filterwizard">Analog Devices Filter Wizard</a></li>
+          <li>Transfer design to KiCad</li>
+        </ul>
+      </section>
+      <section class="cocoa" style="background-image: url(&quot;images/Software-Compressor.png&quot;); background-repeat: no-repeat; background-position: top center;">
+        <h1>Audio Compressor</h1>
+        <ul class="build build-items">
+          <li>Speech has lots of variation volume (50 dB)</li>
+          <ul>
+            <li>Can be difficult to hear soft sounds over noise</li>
+            <li>Highest volume will maximally drive SSB</li>
+            <li>Large dynamic range means lower average power!</li>
+          </ul>
+          <li>Compresses the dynamic range by change amount of volume reduction</li>
+        </ul>
+      </section>
+      <section class="emphatic-text paper">
+        <h1>Exercise - Design a Vocal Compressor</h1>
+        <ul class="build build-items">
+          <li>Can be a bit complex to design from scratch.</li>
+          <li><a target="_blank" href="https://www.electroschematics.com/">We don't have to</a> because, The Internet!</li>
+          <li>Simulate it in LtSpice</li>
+          <li>Add it to KiCad</li>
+          <li>Now run DRC</li>
+        </ul>
+      </section>
+      <section class="emphatic-text paper">
+        <h1>Exercise - Layout a PCB</h1>
+        <ul class="build build-items">
+          <li>Import net into PCB designer</li>
+          <li>Arrange the components and mark the board edge</li>
+          <li>Mark out ground and power planes</li>
+          <li>Connect the traces</li>
+          <li>DRC and 3-D view</li>
+        </ul>
+      </section>
+      <section class="emphatic-text paper">
+        <h1>Exercise - Find a manufacturer</h1>
+        <ul class="build build-items">
+          <li><a target="_blank" href="https://oshpark.com">OSHPark</a></li>
+          <ul>
+            <li>Don't need Gerbers</li>
+            <li>Fast shipping - US Manufacturer</li>
+            <li>Quite expensive</li>
+          </ul>
+          <li><a target="_blank" href="https://pcbshopper.com">PCBShopper</a></li>
+          <ul>
+            <li>Compare prices for many manufacturers</li>
+            <li>Not the nicest user interface</li>
+          </ul>
+          <li><a target="_blank" href="https://jlcpcb.com">JLC-PCB</a></li>
+          <ul>
+            <li>Very cheap!</li>
+            <li>Good quality</li>
+          </ul>
+        </ul>
+      </section>
+      <section class="emphatic-text paper">
+        <h1>Exercise - Order a PCB</h1>
+        <ul class="build build-items">
+          <li>Generate Gerber and Drill files</li>
+          <li>Upload them to the manufacturer for a quote.</li>
+          <li>Order, wait, assemble, repeat if necessary</li>
+        </ul>
+      </section>
+      <section class="carbonfiber cocoa">
+        <h1>A Note on Qucs</h1>
+        <ul class="build build-items">
+          <li>Very complete simulation including digital and mixed-mode</li>
+          <li>Not a lot of models</li>
+          <li>Steep learning curve</li>
+          <li>The only way to go from VHF, UHF, and microwave</li>
+        </ul>
+      </section>
+      <section class="emphatic-text paper">
+        <h1>Exercise - Simulate a microwave filter in Qucs</h1>
+        <ul class="build build-items">
+          <li>Load example filter</li>
+          <li>Simulate</li>
+          <li>Display cartesian and Smith charts</li>
+          <li>A quick look at everything it has to offer</li>
+        </ul>
+      </section>
+    </article>
+    <script src="build/build.js"></script>
+  </body>
+</html>
