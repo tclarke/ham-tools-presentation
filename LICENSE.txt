@@ -1,0 +1,4 @@
+All hardware designs are licensed under the CERN Open Hardware License.
+
+All other parts of this repository are licensed under the Creative Commons CC BY-SA.
+https://creativecommons.org/licenses/by-sa/4.0/

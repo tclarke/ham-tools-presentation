@@ -1,0 +1,144 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    title Useful Tools for the HAM Maker
+
+    link(rel='stylesheet', type='text/css', href='build/build.css')
+
+  body
+
+    article.deck
+
+      section.cocoa
+        h1 Useful Tools for the HAM Maker
+      
+      section.cocoa
+        h1 Abstract
+        
+        #intro.box.top.notify(style="width: 50%; text-align: left", data-noarrow="1")
+            p This presentation is an introduction to some software tools that are useful for design, build, and repair of radio related projects.
+            
+            p In order to make the presentation more relevant, we'll be designing a relatively simple but useful circuit, a microphone preamp and vocal compressor.
+            
+            p While this will be focused on the tools, I will go over some basic theory so that everyone can follow along.
+      
+      section.carbonfiber.cocoa
+        h1 High level design
+        object(data="images/mic_preamp_block.svg", type="image/svg+xml")
+        ul.build.build-items
+          li Electret: A condenser mic that self-charges and has a build-in JFET
+          li LNA: Must work over vocal frequency range.
+          li LPF: remove harmonics from the amplifier
+          li Compressor: Compress the dynamic range so you get a more consistent SSB power level.
+      
+      section.carbonfiber.cocoa
+        h1 Microphone
+        ul.build.build-items
+          li Electret has a permanent static charge
+          li Needs to be biased
+          li Very low output level
+          ul: li It has a JFET amp built-in
+          li We still need to set the drive reactance and AC couple
+          
+      section.emphatic-text.paper
+        h1 Exercise - Microphone
+        ul.build.build-items
+          li Simulation of microphone
+          ul
+            li Manufacturer SPICEs (LTSpice, TINA, etc.)
+            li qucs
+            li KiCad
+          li Parametric search for microphone
+          ul
+            li <a target="_blank" href="https://mouser.com">Mouser</a>
+            li <a target="_blank" href="https://www.digikey.com/products/en/audio-products/microphones/158?k=microphone&k=&pkeyword=microphone&sv=0&pv630=3&sf=0&FV=a40062%2Cd80440%2Cd800a2%2Cd800d1%2Cd800d7%2Cd800dc%2Cd800dd%2Cd800e1%2Cd800ee%2Cd8001f%2Cd80020%2Cd80029%2Cd8002b%2Cd8030d%2Cd8030e%2Cd80310%2Cd80311%2Cd80317%2Cd80318%2Cd8031a%2Cd8031b%2Cd8031f%2Cd80326%2Cd8032b%2Cd8032c%2Cd8032f%2Cd80376%2Cd80380%2Cd80384%2C1f140000%2Cyr100Hz+~+10kHz%7C2145%2Cyr100Hz+~+5.5kHz%7C2145%2Cyr100Hz+~+5.8kHz%7C2145%2Cyr100Hz+~+5kHz%7C2145%2Cyr100Hz+~+6.25kHz%7C2145%2Cyr100Hz+~+6.4kHz%7C2145%2Cyr100Hz+~+6kHz%7C2145%2Cyr100Hz+~+7.2kHz%7C2145%2Cyr20Hz+~+15kHz%7C2145%2Cyr20Hz+~+20kHz%7C2145%2Cyr30Hz+~+15kHz%7C2145%2Cyr50Hz+~+16kHz%7C2145%2Cffe0009e&quantity=1&ColumnSort=1000011&page=1&stock=1&pageSize=25">Digikey</a>
+            li <a target="_blank" href="https://octopart.com">Octopart</a>
+            li Manufacturer sites
+          li Reading a microphone <a target="_blank" href="http://www.puiaudio.com/pdf/AUM-5047L-3-LW100-R.pdf">datasheet</a>
+          ul
+            li <a target="_blank" href="http://www.sengpielaudio.com/calculator-db-volt.htm">dBV to V converter</a>
+            
+      section.carbonfiber.cocoa
+        h1 Low Noise Amplifier and Filter
+        ul.build.build-items
+          li OPAMPs are great for audio frequencies
+          li Boost the gain more than needed and include a passive LPF
+          li Or just use an active filter with gain
+          
+      section.emphatic-text.paper
+        h1 Exercise - Design a LPF with Gain
+        ul.build.build-items
+          li <a target="_blank" href="https://www.analog.com/designtools/en/filterwizard">Analog Devices Filter Wizard</a>
+          li Transfer design to KiCad
+            
+      section(style='background-image: url("images/Software-Compressor.png"); background-repeat: no-repeat; background-position: top center;' ).cocoa
+        h1 Audio Compressor
+        ul.build.build-items
+         li Speech has lots of variation volume (50 dB)
+         ul
+           li Can be difficult to hear soft sounds over noise
+           li Highest volume will maximally drive SSB
+           li Large dynamic range means lower average power!
+         li Compresses the dynamic range by change amount of volume reduction
+       
+      section.emphatic-text.paper
+        h1 Exercise - Design a Vocal Compressor
+        ul.build.build-items
+          li Can be a bit complex to design from scratch.
+          li <a target="_blank" href="https://www.electroschematics.com/">We don't have to</a> because, The Internet!
+          li Simulate it in LtSpice
+          li Add it to KiCad
+          li Now run DRC
+           
+      section.emphatic-text.paper
+        h1 Exercise - Layout a PCB
+        ul.build.build-items
+          li Import net into PCB designer
+          li Arrange the components and mark the board edge
+          li Mark out ground and power planes
+          li Connect the traces
+          li DRC and 3-D view
+          
+      section.emphatic-text.paper
+        h1 Exercise - Find a manufacturer
+        ul.build.build-items
+          li <a target="_blank" href="https://oshpark.com">OSHPark</a>
+          ul
+            li Don't need Gerbers
+            li Fast shipping - US Manufacturer
+            li Quite expensive
+          li <a target="_blank" href="https://pcbshopper.com">PCBShopper</a>
+          ul
+            li Compare prices for many manufacturers
+            li Not the nicest user interface
+          li <a target="_blank" href="https://jlcpcb.com">JLC-PCB</a>
+          ul
+            li Very cheap!
+            li Good quality
+            
+      section.emphatic-text.paper
+        h1 Exercise - Order a PCB
+        ul.build.build-items
+          li Generate Gerber and Drill files
+          li Upload them to the manufacturer for a quote.
+          li Order, wait, assemble, repeat if necessary
+          
+      section.carbonfiber.cocoa
+        h1 A Note on Qucs
+        ul.build.build-items
+          li Very complete simulation including digital and mixed-mode
+          li Not a lot of models
+          li Steep learning curve
+          li The only way to go from VHF, UHF, and microwave
+          
+      section.emphatic-text.paper
+        h1 Exercise - Simulate a microwave filter in Qucs
+        ul.build.build-items
+          li Load example filter
+          li Simulate
+          li Display cartesian and Smith charts
+          li A quick look at everything it has to offer
+
+    script(src='build/build.js')

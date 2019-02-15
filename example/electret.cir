@@ -1,0 +1,13 @@
+.subckt electret mic+ mic-
+
+Vmic gate mic- AC 0.01
+J1 mic+ gate mic- JMIC
+
+.model  JMIC NJF
+
+* (Beta=1.27e-3 Betatce=-0.5 Rd=5 Rs=5 Lambda=10m
+*  +Vto=-0.6 Votc=-2.5m Is=114.5f Isr=0.9p N=1 Nr=2 Xti=3
+*  +Alpha=506.6u Vk=251.7 Cgd=3.5p M=0.2271 Pb=0.5 Fc=0.5 Cgs=0.64p
+*  +Kf=2.918E-18 Af=1)
+
+.ends

@@ -24,3 +24,7 @@ _autosave-*
 # Exported BOM files
 *.xml
 *.csv
+node_modules/
+package-lock.json
+presentation/dist
+.DS_Store
